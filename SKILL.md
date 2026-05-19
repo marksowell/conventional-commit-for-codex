@@ -1,6 +1,6 @@
 ---
 name: conventional-commit
-description: "Codex skill for Conventional Commits with required scope and reliable commit-and-sync workflows."
+description: "Use this skill whenever the user asks to commit, push, sync, or generate a Conventional Commit message. It enforces required scope and handles reliable commit-and-sync workflows."
 ---
 
 # Conventional Commit
@@ -22,9 +22,19 @@ Use this skill when:
 - the user asks for a commit message
 - the user says `commit msg`
 - the user says `commit and sync`
+- the user says `commit`
+- the user says `sync`
+- the user says `push`
 - the user asks to commit changes
+- the user asks to push changes
+- the user asks to sync the branch
 - the user wants a pending diff summarized into a commit subject
 - the user wants commit wording that matches the repo's style
+
+This skill is required whenever the user asks to commit, sync, or push.
+Do not perform a commit or push directly from general repo habits when one of
+those triggers is present. Use this skill first, even if you already know how
+to run the git commands yourself.
 
 ## What This Skill Does
 
@@ -117,6 +127,7 @@ Avoid:
    - create the commit with the chosen subject
    - push the current branch to its upstream
    - re-check `git status -sb`
+   - if the user asked to `sync` or `push`, treat that as part of this same required workflow
 11. Consider sync incomplete if the branch still shows `ahead` after push. Keep going until it is no longer ahead, or clearly report the blocker.
 
 ## Decision Rules
@@ -156,3 +167,7 @@ When the user asks to `commit and sync`:
   - the commit hash
   - whether push succeeded
   - whether `git status -sb` confirms the branch is no longer ahead
+
+When the user asks to `commit`, `push`, or `sync`:
+- do not bypass this skill
+- use the same workflow and reporting style that applies to `commit and sync`

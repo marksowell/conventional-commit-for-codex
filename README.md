@@ -1,6 +1,6 @@
 # Conventional Commit for Codex
 
-A Codex skill for generating Conventional Commit messages with required scope and for handling reliable `commit and sync` workflows.
+A Codex skill for generating Conventional Commit messages with required scope and for handling reliable `commit`, `push`, `sync`, and `commit and sync` workflows.
 
 This skill aligns with [Conventional Commits 1.0.0](https://www.conventionalcommits.org/en/v1.0.0/) and adds a stricter house rule:
 - always require a scope
@@ -29,6 +29,17 @@ Examples:
 - checking git state before commit
 - completing `commit and sync` safely
 - verifying the branch is no longer ahead after push
+
+## Trigger Rule
+
+Use this skill whenever the user asks to:
+- `commit`
+- `push`
+- `sync`
+- `commit and sync`
+- generate or refine a Conventional Commit message
+
+Do not bypass the skill and run the git workflow directly when those triggers are present.
 
 ## Supported Types
 
@@ -86,6 +97,9 @@ Then restart Codex so the skill is discovered.
 Trigger it with prompts like:
 - `commit msg`
 - `commit and sync`
+- `commit`
+- `sync`
+- `push`
 - `write a commit message for this diff`
 - `commit these changes`
 - `use conventional commit naming`
